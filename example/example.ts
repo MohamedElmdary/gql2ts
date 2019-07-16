@@ -34,6 +34,12 @@ const gql = `
     # add support for scalar
     scalar MyCustomScalar
 
+    # add support for input
+    input createUserInput {
+        id: ID!
+        age: Float
+    }
+
 `;
 
-Gql2ts.compile(gql);
+console.log(Gql2ts.compile(gql));

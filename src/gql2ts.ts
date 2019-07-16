@@ -13,9 +13,9 @@ import { getInterfaces } from "./lib/getInterfaces.helpers";
 export class Gql2ts {
   private constructor(private readonly code: string) {}
 
-  public static compile(code: string): void {
+  public static compile(code: string): string {
     const gql2ts = new Gql2ts(code);
-    console.log(gql2ts.parse());
+    return gql2ts.parse();
   }
 
   private parse(): string {
@@ -77,6 +77,8 @@ export class Gql2ts {
   }
 
   private input(def: InputObjectTypeDefinitionNode): string {
-    return ``;
+    return `interface ${def.name.value} { ${(def.fields || [])
+      .map(field => field.name.value + getType(field))
+      .join("; ")} }\n`;
   }
 }

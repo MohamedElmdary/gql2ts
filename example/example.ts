@@ -31,6 +31,9 @@ const gql = `
         age: Float!
     }
 
+    # add support for scalar
+    scalar MyCustomScalar
+
 `;
 
 Gql2ts.compile(gql);

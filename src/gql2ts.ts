@@ -65,7 +65,6 @@ export class Gql2ts {
   }
 
   private object(def: ObjectTypeDefinitionNode): string {
-    console.log(JSON.stringify(def, void 0, 2));
     return `interface ${def.name.value} ${getInterfaces(
       (def.interfaces || []).slice()
     )} { ${(def.fields || [])
@@ -74,7 +73,7 @@ export class Gql2ts {
   }
 
   private scalar(def: ScalarTypeDefinitionNode): string {
-    return ``;
+    return `type ${def.name.value} { };\n`;
   }
 
   private input(def: InputObjectTypeDefinitionNode): string {

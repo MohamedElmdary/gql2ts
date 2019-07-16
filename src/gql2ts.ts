@@ -8,6 +8,7 @@ import {
   InputObjectTypeDefinitionNode
 } from "graphql";
 import { getType } from "./lib";
+import { getInterfaces } from "./lib/getInterfaces.helpers";
 
 export class Gql2ts {
   private constructor(private readonly code: string) {}
@@ -60,11 +61,16 @@ export class Gql2ts {
   private union(def: UnionTypeDefinitionNode): string {
     return `type ${def.name.value} = ${(def.types || [])
       .map(type => type.name.value)
-      .join(" | ")};`;
+      .join(" | ")};\n`;
   }
 
   private object(def: ObjectTypeDefinitionNode): string {
-    return ``;
+    console.log(JSON.stringify(def, void 0, 2));
+    return `interface ${def.name.value} ${getInterfaces(
+      (def.interfaces || []).slice()
+    )} { ${(def.fields || [])
+      .map(field => field.name.value + getType(field))
+      .join("; ")} }\n`;
   }
 
   private scalar(def: ScalarTypeDefinitionNode): string {

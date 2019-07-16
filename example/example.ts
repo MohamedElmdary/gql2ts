@@ -8,19 +8,28 @@ const gql = `
     }
 
     # add support for interfaces
-    interface User {
+    interface UserInterface {
         id: ID!
-        name: String!
+        name: String
     }
 
-    interface Admin {
+    interface AdminInterface {
         id: ID!
         name: String!
         age: Int!
     }
 
+    interface SpecialInterface {
+        special: Boolean!
+    }
+
     # add support for union
-    union RolesUnion = User | Admin
+    union RolesUnion = UserInterface | AdminInterface
+
+    # add support for object
+    type UserType implements UserInterface & SpecialInterface {
+        age: Float!
+    }
 
 `;
 

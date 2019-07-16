@@ -2,5 +2,5 @@
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["test/*.spec.ts"],
-  "exec": "ts-node ./src/gql2ts.ts"
+  "exec": "ts-node ./example/example.ts"
 }

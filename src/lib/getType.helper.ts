@@ -9,8 +9,12 @@ export const types: any = {
 };
 
 export function getType(field: FieldDefinitionNode & any): string {
-  const { kind, type } = field.type;
-  const fieldType: string = type.name.value;
-  let res = kind === "NonNullType" ? ": " : "?: ";
-  return res + types[fieldType];
+  try {
+    const { kind, type } = field.type;
+    const fieldType: string = type.name.value; // if not throw error so it's NonNullType
+    return ": " + types[fieldType];
+  } catch (e) {
+    console.log("error", JSON.stringify(field, void 0, 2));
+    return "?: " + types[field.type.name.value];
+  }
 }

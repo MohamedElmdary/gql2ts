@@ -8,8 +8,12 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@types/graphql": "^14.2.2",
     "nodemon": "^1.19.1",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "graphql": "^14.4.2"
   }
 }

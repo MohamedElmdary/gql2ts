@@ -7,6 +7,7 @@ import {
   ScalarTypeDefinitionNode,
   InputObjectTypeDefinitionNode
 } from "graphql";
+import { getType } from "./lib";
 
 export class Gql2ts {
   private constructor(private readonly code: string) {}
@@ -45,13 +46,15 @@ export class Gql2ts {
   }
 
   private enum(def: EnumTypeDefinitionNode): string {
-    return `\nenum ${def.name.value} { ${(def.values || [])
+    return `enum ${def.name.value} { ${(def.values || [])
       .map(v => v.name.value)
       .join(", ")} }\n`;
   }
 
   private interface(def: InterfaceTypeDefinitionNode): string {
-    return ``;
+    return `interface ${def.name.value} { ${(def.fields || [])
+      .map(field => field.name.value + getType(field))
+      .join("; ")} }\n`;
   }
 
   private union(def: UnionTypeDefinitionNode): string {

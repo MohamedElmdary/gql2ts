@@ -58,7 +58,9 @@ export class Gql2ts {
   }
 
   private union(def: UnionTypeDefinitionNode): string {
-    return ``;
+    return `type ${def.name.value} = ${(def.types || [])
+      .map(type => type.name.value)
+      .join(" | ")};`;
   }
 
   private object(def: ObjectTypeDefinitionNode): string {

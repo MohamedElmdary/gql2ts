@@ -2,7 +2,7 @@ import { Gql2ts } from "../src";
 const gql = `
     
     # add support for enum
-    enum Rules {
+    enum RolesEnum {
         ADMIN
         USER
     }
@@ -12,6 +12,15 @@ const gql = `
         id: ID!
         name: String!
     }
+
+    interface Admin {
+        id: ID!
+        name: String!
+        age: Int!
+    }
+
+    # add support for union
+    union RolesUnion = User | Admin
 
 `;
 

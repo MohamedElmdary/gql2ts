@@ -7,9 +7,7 @@ import {
   ScalarTypeDefinitionNode,
   InputObjectTypeDefinitionNode
 } from "graphql";
-import { getType } from "./lib";
-import { getInterfaces } from "./lib/getInterfaces.helpers";
-import { getName } from "./lib/getName.helper";
+import { getType, getInterfaces, getName } from "./lib";
 
 export class Gql2ts {
   private constructor(private readonly code: string) {}

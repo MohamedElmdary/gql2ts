@@ -1,5 +1,9 @@
 import { Gql2ts } from "../src";
 const gql = `
+    enum Rules {
+        ADMIN
+        USER
+    }
     type User {
         id: ID! @unique
         name: String!

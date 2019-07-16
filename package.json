@@ -1,0 +1,15 @@
+{
+  "name": "gql2ts",
+  "version": "1.0.0",
+  "description": "generator for typescript types for autocomplete based on graphql schema",
+  "main": "gql2ts.ts",
+  "repository": "https://github.com/MohamedElmdary/gql2ts",
+  "author": "MohamedElmdary",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
+}

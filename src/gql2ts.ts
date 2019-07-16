@@ -47,38 +47,38 @@ export class Gql2ts {
   }
 
   private enum(def: EnumTypeDefinitionNode): string {
-    return `enum ${def.name.value} { ${(def.values || [])
+    return `enum ${def.name.value} {\n  ${(def.values || [])
       .map(v => v.name.value)
-      .join(", ")} }\n`;
+      .join(",\n  ")} \n}\n\n`;
   }
 
   private interface(def: InterfaceTypeDefinitionNode): string {
-    return `interface ${def.name.value} { ${(def.fields || [])
+    return `interface ${def.name.value} {\n  ${(def.fields || [])
       .map(field => field.name.value + getType(field))
-      .join("; ")} }\n`;
+      .join(";\n  ")} \n}\n\n`;
   }
 
   private union(def: UnionTypeDefinitionNode): string {
     return `type ${def.name.value} = ${(def.types || [])
       .map(type => type.name.value)
-      .join(" | ")};\n`;
+      .join(" | ")};\n\n`;
   }
 
   private object(def: ObjectTypeDefinitionNode): string {
     return `interface ${def.name.value} ${getInterfaces(
       (def.interfaces || []).slice()
-    )} { ${(def.fields || [])
+    )} {\n  ${(def.fields || [])
       .map(field => field.name.value + getType(field))
-      .join("; ")} }\n`;
+      .join(";\n  ")} \n}\n\n`;
   }
 
   private scalar(def: ScalarTypeDefinitionNode): string {
-    return `type ${def.name.value} { };\n`;
+    return `type ${def.name.value} { };\n\n`;
   }
 
   private input(def: InputObjectTypeDefinitionNode): string {
-    return `interface ${def.name.value} { ${(def.fields || [])
+    return `interface ${def.name.value} {\n  ${(def.fields || [])
       .map(field => field.name.value + getType(field))
-      .join("; ")} }\n`;
+      .join(";\n  ")} \n}\n\n`;
   }
 }

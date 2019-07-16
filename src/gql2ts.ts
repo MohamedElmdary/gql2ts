@@ -1,17 +1,53 @@
+import {
+  parse,
+  EnumTypeDefinitionNode,
+  InterfaceTypeDefinitionNode,
+  UnionTypeDefinitionNode,
+  ObjectTypeDefinitionNode,
+  ScalarTypeDefinitionNode,
+  InputObjectTypeDefinitionNode
+} from "graphql";
+
 export class Gql2ts {
   private constructor(private readonly code: string) {}
 
   public static compile(code: string): void {
-    new Gql2ts(code);
+    const gql2ts = new Gql2ts(code);
+    gql2ts.parse();
   }
 
-  private enum() {}
+  private parse() {
+    const ast = parse(this.code).definitions;
+    for (const definition of ast) {
+      switch (definition.kind) {
+        case "EnumTypeDefinition":
+          this.enum(definition);
+          break;
+      }
+    }
+  }
 
-  private interface() {}
+  private enum(def: EnumTypeDefinitionNode): string {
+    return ``;
+  }
 
-  private type() {}
+  private interface(def: InterfaceTypeDefinitionNode): string {
+    return ``;
+  }
 
-  private union() {}
+  private union(def: UnionTypeDefinitionNode): string {
+    return ``;
+  }
 
-  private parser() {}
+  private object(def: ObjectTypeDefinitionNode): string {
+    return ``;
+  }
+
+  private scalar(def: ScalarTypeDefinitionNode): string {
+    return ``;
+  }
+
+  private input(def: InputObjectTypeDefinitionNode): string {
+    return ``;
+  }
 }

@@ -9,6 +9,7 @@ import {
 } from "graphql";
 import { getType } from "./lib";
 import { getInterfaces } from "./lib/getInterfaces.helpers";
+import { getName } from "./lib/getName.helper";
 
 export class Gql2ts {
   private constructor(private readonly code: string) {}
@@ -23,6 +24,7 @@ export class Gql2ts {
     let result = "";
     for (const definition of ast) {
       switch (definition.kind) {
+        // case
         case "EnumTypeDefinition":
           result += this.enum(definition);
           break;
@@ -68,7 +70,7 @@ export class Gql2ts {
     return `interface ${def.name.value} ${getInterfaces(
       (def.interfaces || []).slice()
     )} {\n  ${(def.fields || [])
-      .map(field => field.name.value + getType(field))
+      .map(field => getName(field) + getType(field))
       .join(";\n  ")} \n}\n\n`;
   }
 

@@ -29,6 +29,7 @@ const gql = `
     # add support for object
     type UserType implements UserInterface & SpecialInterface {
         age: Float!
+        school(in: Boolean!): Int!
     }
 
     # add support for scalar
@@ -38,6 +39,14 @@ const gql = `
     input createUserInput {
         id: ID!
         age: Float
+    }
+
+    type Query {
+        getUser(id: ID!): User!
+    }
+
+    type Mutation {
+        setUser(id: ID!): User
     }
 
 `;

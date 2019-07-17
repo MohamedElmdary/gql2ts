@@ -49,6 +49,14 @@ const gql = `
         setUser(id: ID!): User
     }
 
+    mutation test {
+        thing
+    }
+      
+      query GetThing {
+        thing
+      }
+      
 `;
 
 console.log(Gql2ts.compile(gql));

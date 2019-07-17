@@ -41,6 +41,13 @@ export class Gql2ts {
         case "InputObjectTypeDefinition":
           result += this.input(definition);
           break;
+        default:
+          console.warn(
+            "\x1b[33m%s\x1b[0m",
+            (((definition as any)["operation"] || "this") as string)
+              .toString()
+              .toLocaleUpperCase() + " operation currently not supported. 🥺\n"
+          );
       }
     }
     return result;
